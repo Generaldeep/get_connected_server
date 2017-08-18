@@ -2,8 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const firebase = require('firebase');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('./config/keys');
+
 const app = express();
 
+passport.use(new GoogleStrategy({
+  clientID: keys.googleClientID,
+  clientSecret: keys.googleClientSecret
+}));
 
 // Initialize Firebase
 const config = {
@@ -26,6 +34,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions));
+
+
+
+
 
 require('./routes/simpleRoute')(app);
 require('./routes/jobs')(app);
