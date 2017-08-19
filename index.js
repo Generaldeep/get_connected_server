@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const firebase = require('firebase');
+const firebaseInfo = require('./config/firebaseConfig');
 require('./services/passport');
 
 const app = express();
@@ -11,12 +12,12 @@ const app = express();
 
 // Initialize Firebase
 const config = {
-  apiKey: "AIzaSyDBShnmL4sNL09g5ZjE84iX0gSD_xJ8JQA",
-  authDomain: "getconnected-1a33d.firebaseapp.com",
+  apiKey: firebaseInfo.apiKey,
+  authDomain: firebaseInfo.authDomain,
   databaseURL: "https://getconnected-1a33d.firebaseio.com",
-  projectId: "getconnected-1a33d",
+  projectId: firebaseInfo.projectId,
   storageBucket: "",
-  messagingSenderId: "483962483612"
+  messagingSenderId: firebaseInfo.messagingSenderId
 };
 firebase.initializeApp(config);
 
@@ -33,11 +34,7 @@ app.options('*', cors(corsOptions));
 
 
 
-
-
-require('./routes/simpleRoute')(app);
 require('./routes/jobs')(app);
-require('./routes/firebaseRoute')(app);
 require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5050;

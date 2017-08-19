@@ -10,7 +10,8 @@ passport.use(new GoogleStrategy(
     callbackURL: '/auth/google/callback'
   },
   (accessToken, refreshToken, profile, done) => {
-    let user = {deep: profile.id}
-
-    firebase.database().ref('users').push().set(user);
-  }));
+    let user = {googleId: profile.id, name: profile.displayName}
+    let userKey = firebase.database().ref('users').push().key;
+    firebase.database().ref(`users/${userKey}`).set(user)
+  })
+);
