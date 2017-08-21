@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FirebaseStrategy = require('passport-firebase-auth').Strategy;
-const keys = require('../config/keys');
+// const keys = require('../config/keys');
 const firebaseInfo =  require('../config/firebaseConfig');
 const firebase = require('firebase');
 
