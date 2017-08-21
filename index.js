@@ -34,6 +34,7 @@ app.options('*', cors(corsOptions));
 
 require('./routes/jobs')(app);
 require('./routes/authRoutes')(app);
+require('./routes/simpleRoute')(app);
 
 const PORT = process.env.PORT || 5050;
 app.listen(PORT)
